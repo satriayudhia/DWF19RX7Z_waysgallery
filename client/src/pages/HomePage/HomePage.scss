@@ -1,0 +1,43 @@
+.homepage-top-wrapper {
+  display: flex;
+  margin-top: 3%;
+  .homepage-left {
+    width: 100%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .homepage-right {
+    width: 100%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.homepage-content-wrapper {
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .img-content-post {
+    width: 354px;
+    height: 240px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: #e7e7e7;
+  }
+}
+
+.homepage-title {
+  margin-top: 44px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  color: #000000;
+}

@@ -1,0 +1,181 @@
+.edit-profile-container {
+  display: flex;
+  margin-top: 78px;
+  .edit-profile-img-preview {
+    width: 100%;
+    margin-left: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .edit-profile-art-upload {
+      .edit-best-upload {
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 33px;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        .edit-blue-upload {
+          font-family: Avenir;
+          font-style: normal;
+          font-weight: 800;
+          font-size: 24px;
+          line-height: 33px;
+          align-items: center;
+          text-align: center;
+          color: #2fc4b2;
+        }
+      }
+      .dropzone {
+        width: 635px;
+        height: 478px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 5px dashed #b2b2b2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 23px;
+        cursor: pointer;
+
+        &:hover {
+          border: 5px dashed #5ca098;
+        }
+        &:active,
+        &:focus {
+          outline-style: none;
+        }
+      }
+      .active {
+        border: 5px dashed #5ca098;
+      }
+    }
+    .edit-profile-art-preview {
+      .edit-profile-preview-image-bottom {
+        width: 150px;
+        height: 120px;
+        object-fit: cover;
+        border: 2px dashed #b2b2b2;
+      }
+    }
+    .img-preview-profile {
+      width: 635px;
+      height: 478px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 5px dashed #b2b2b2;
+    }
+  }
+  .edit-profile-form-container {
+    width: 100%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    .edit-profile-upload-container {
+      .attach-profpic {
+        cursor: pointer;
+        .circle {
+          width: 200px;
+          height: 200px;
+          border: 5px dashed #b2b2b2;
+          border-radius: 50%;
+          object-fit: scale-down;
+          display: flex;
+          justify-content: center;
+          align-self: center;
+          align-items: center;
+          &:hover {
+            border: 5px dashed #5ca098;
+          }
+          .camera {
+            &:hover {
+              fill: #5ca098;
+            }
+          }
+        }
+        .img-preview-profile {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          border: 3px solid #5ca098;
+          object-fit: cover;
+        }
+      }
+    }
+    .edit-profile-input-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      .form-input {
+        width: 350px;
+        height: 50px;
+        background: #fbfbfb;
+        border: 2px solid #5ca098;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding-left: 10px;
+
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 25px;
+
+        color: rgba(104, 50, 50, 0.5);
+
+        &:active,
+        &:focus {
+          outline-style: none;
+        }
+        &:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0px 1000px #fbfbfb inset;
+          -webkit-text-fill-color: rgba(104, 50, 50, 0.5) !important;
+        }
+      }
+      .btn-save {
+        font-family: Avenir;
+      }
+    }
+  }
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  .modal-confirms {
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+
+    color: #469f74;
+  }
+
+  .btn-modal-ok {
+    margin-top: 10px;
+    width: 150px;
+
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    &:active,
+    &:focus {
+      outline-style: none;
+    }
+  }
+}

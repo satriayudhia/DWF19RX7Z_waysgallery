@@ -1,0 +1,85 @@
+.addpost-container {
+  margin-top: 3%;
+  display: flex;
+  .addpost-left-container {
+    margin-left: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .dropzone {
+      width: 635px;
+      height: 478px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 5px dashed #b2b2b2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Avenir;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 23px;
+      &:active,
+      &:focus {
+        outline-style: none;
+      }
+    }
+  }
+  .addpost-right-container {
+    margin-right: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .form-input {
+      width: 350px;
+      height: 50px;
+      background: rgba(224, 200, 200, 0.25);
+      border: 2px solid #5ca098;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding-left: 10px;
+
+      font-family: Avenir;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 25px;
+
+      color: rgba(104, 50, 50, 0.5);
+
+      &:active,
+      &:focus {
+        outline-style: none;
+      }
+    }
+    .form-textarea {
+      width: 350px;
+      height: 198px;
+      background: rgba(224, 200, 200, 0.25);
+      border: 2px solid #5ca098;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding-left: 10px;
+
+      font-family: Avenir;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 25px;
+
+      color: rgba(104, 50, 50, 0.5);
+
+      &:active,
+      &:focus {
+        outline-style: none;
+      }
+    }
+    .button-addpost-container {
+      padding-top: 20px;
+      display: flex;
+    }
+  }
+}
