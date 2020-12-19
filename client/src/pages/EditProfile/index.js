@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import { useDropzone } from "react-dropzone";
 import { Image } from "cloudinary-react";
 import Modal from "react-bootstrap/Modal";
-import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 
 //CSS
@@ -21,7 +20,6 @@ import FormikControl from "../../config/FormikControl";
 import Header from "../../components/molecules/Header";
 import Gap from "../../components/atoms/Gap";
 import { ReactComponent as Camera } from "../../assets/logos/camera.svg";
-import Loading from "../../components/atoms/Loading";
 
 const EditProfile = () => {
   //Get UserInfo
@@ -82,8 +80,6 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     try {
-      console.log("PROFPIC", profpic);
-
       if (profpic == undefined) {
         setLoading(true);
         const editUser = { greeting: e.greeting, fullname: e.fullname };
@@ -239,7 +235,7 @@ const EditProfile = () => {
         centered
         transparent={true}
       >
-        <Modal.Body className="modal-body">
+        <Modal.Body className="modal-bodys">
           <h2 className="modal-confirms">Successfully Changed</h2>
           <Button
             variant="info"

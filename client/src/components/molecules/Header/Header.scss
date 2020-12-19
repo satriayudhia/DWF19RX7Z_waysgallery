@@ -2,7 +2,7 @@
   display: flex;
   .logo-header-login {
     width: 100%;
-    margin-top: 80px;
+    margin-top: 18px;
     padding-left: 10%;
     .logo-header-cursor {
       cursor: pointer;
@@ -15,7 +15,7 @@
     justify-content: flex-end;
     align-items: center;
     padding-right: 10%;
-    margin-top: 80px;
+    margin-top: 18px;
     text-align: end;
 
     .profile-header-right {
@@ -25,30 +25,10 @@
       position: relative;
       .btn-upload-header {
         width: 100px;
-        height: 32px;
-        background: #2fc4b2;
-        border-radius: 5px;
-        border: 2px solid #2fc4b2;
-        padding-top: 5px;
-
-        font-family: Avenir;
-        font-style: normal;
-        font-weight: 800;
+        height: 30px;
         font-size: 14px;
-        line-height: 19px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        color: #ffffff;
+        font-family: Avenir;
         margin-right: 33px;
-        cursor: pointer;
-
-        &:hover {
-          background: #fff;
-          border: 2px solid #2fc4b2;
-          color: #2fc4b2;
-        }
       }
     }
     .cart-header {

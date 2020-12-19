@@ -8,12 +8,12 @@ import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import Button from "react-bootstrap/Button";
 
 //CSS
-import "./LandingPage.scss";
+import "./Landing.scss";
 
 //Components
-import Button from "../../components/atoms/Button";
 import Gap from "../../components/atoms/Gap";
 import { ReactComponent as LandingBg } from "../../assets/images/home.svg";
 import { ReactComponent as LandingLogo } from "../../assets/images/landing-logo.svg";
@@ -25,7 +25,7 @@ import { ReactComponent as VectorRightBot } from "../../assets/images/vector-rig
 import FormikControl from "../../config/FormikControl";
 import { API, setAuthToken } from "../../config/API";
 
-const LandingPage = (props) => {
+const Landing = (props) => {
   const router = useHistory();
   //Modal
   const [registerModal, setRegisterModal] = useState(false);
@@ -143,15 +143,21 @@ const LandingPage = (props) => {
           <Row className="btn-left-landing">
             <Button
               className="btn-reg-landing"
+              variant="info"
               onClick={() => setRegisterModal(true)}
-              title="Join Now"
-            />
+            >
+              Join Now
+            </Button>
             <Gap width={20} />
+
             <Button
               className="btn-log-landing"
+              variant="light"
               onClick={() => setLoginModal(true)}
               title="Login"
-            />
+            >
+              Login
+            </Button>
           </Row>
         </Col>
         <Col className="landing-right-container">
@@ -191,6 +197,7 @@ const LandingPage = (props) => {
                       type="password"
                       name="password"
                     />
+                    <Gap height={20} />
                     {alertLogin && (
                       <Alert
                         className="alert-log"
@@ -200,12 +207,16 @@ const LandingPage = (props) => {
                         Your email or password is incorrect !
                       </Alert>
                     )}
-                    <Gap height={29} />
+
                     <Button
-                      title="Login"
+                      block
+                      className="btn-login"
                       type="submit"
+                      variant="info"
                       disabled={!formik.isValid}
-                    />
+                    >
+                      Login
+                    </Button>
                     <Gap height={29} />
                     <p className="to-register">
                       Don't have an account ? Click{" "}
@@ -291,10 +302,14 @@ const LandingPage = (props) => {
                     )}
                     <Gap height={29} />
                     <Button
-                      title="Register"
+                      block
+                      className="btn-register"
                       type="submit"
+                      variant="info"
                       disabled={!formik.isValid}
-                    />
+                    >
+                      Register
+                    </Button>
                     <Gap height={29} />
                     <p className="to-login">
                       Already have an account ? Click{" "}
@@ -313,4 +328,4 @@ const LandingPage = (props) => {
   );
 };
 
-export default LandingPage;
+export default Landing;

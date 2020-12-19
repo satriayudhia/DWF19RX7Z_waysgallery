@@ -14,7 +14,24 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
       });
       User.hasMany(models.Post, {
+        as: "post",
         foreignKey: "userId",
+      });
+      User.hasMany(models.Transaction, {
+        as: "orderBy",
+        foreignKey: "orderBy",
+      });
+      User.hasMany(models.Transaction, {
+        as: "orderTo",
+        foreignKey: "orderTo",
+      });
+      User.hasMany(models.Follow, {
+        as: "following",
+        foreignKey: "following",
+      });
+      User.hasMany(models.Follow, {
+        as: "follower",
+        foreignKey: "follower",
       });
     }
   }

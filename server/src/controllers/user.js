@@ -1,4 +1,4 @@
-const { User, Art, ArtUser } = require("../../models");
+const { User, Art, Post, Photo, Follow } = require("../../models");
 
 //GET ALL USERS
 exports.getUsers = async (req, res) => {
@@ -34,6 +34,9 @@ exports.getUsers = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     const { id } = req.params;
+
+    const latestId = await Post.max("id", { where: { userId: id } });
+
     const user = await User.findOne({
       where: { id },
       attributes: {
@@ -41,10 +44,38 @@ exports.getUser = async (req, res) => {
       },
       include: [
         {
+          model: Post,
+          as: "post",
+          where: { id: latestId },
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "UserId", "userId"],
+          },
+          include: [
+            {
+              model: Photo,
+              as: "photos",
+            },
+          ],
+        },
+        {
           model: Art,
           as: "arts",
           attributes: {
             exclude: ["createdAt", "updatedAt", "UserId", "userId"],
+          },
+        },
+        {
+          model: Follow,
+          as: "following",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "id"],
+          },
+        },
+        {
+          model: Follow,
+          as: "follower",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "id"],
           },
         },
       ],

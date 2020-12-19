@@ -1,0 +1,55 @@
+.header-detail-container {
+  margin-top: 3%;
+  width: 100%;
+  display: flex;
+  .header-detail-left {
+    margin-left: 20%;
+    display: flex;
+    align-items: center;
+    .header-detail-avatar-container {
+      background-color: seashell;
+      padding-right: 10px;
+      .header-detail-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    .header-detail-title {
+      font-family: Avenir;
+      color: #000000;
+      .header-detail-top-title {
+        margin-top: 10px;
+        margin-bottom: -2px;
+        font-weight: 900;
+        font-size: 18px;
+      }
+      .header-detail-name {
+        font-weight: normal;
+        font-size: 14px;
+      }
+    }
+  }
+  .header-detail-right {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    .btn-follow {
+      font-family: Avenir;
+      width: 100px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn-hire {
+      font-family: Avenir;
+      width: 100px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

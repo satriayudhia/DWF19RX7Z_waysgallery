@@ -72,13 +72,54 @@ exports.getPost = async (req, res) => {
         {
           model: User,
           attributes: {
-            exclude: [
-              "createdAt",
-              "updatedAt",
-              "password",
-              "profpic",
-              "greeting",
-            ],
+            exclude: ["createdAt", "updatedAt", "password", "greeting"],
+          },
+        },
+      ],
+    });
+
+    if (!post) {
+      return res.status(400).send({
+        status: "post not found",
+        data: [],
+      });
+    }
+
+    res.send({
+      status: "success",
+      data: { post: post },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      error: {
+        status: "server error",
+      },
+    });
+  }
+};
+
+//GET SPECIFIC POST BY USER ID
+exports.getPostByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const post = await Post.findAll({
+      where: { userId },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "userId", "UserId"],
+      },
+      include: [
+        {
+          model: Photo,
+          as: "photos",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "postId", "PostId"],
+          },
+        },
+        {
+          model: User,
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password", "greeting"],
           },
         },
       ],

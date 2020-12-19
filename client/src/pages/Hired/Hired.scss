@@ -1,0 +1,111 @@
+.hired-page-container {
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+
+  .form-input {
+    width: 752px;
+    height: 50px;
+    background: #fbfbfb;
+    border: 2px solid #15a3b9;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 10px;
+
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 25px;
+
+    color: rgba(104, 50, 50, 0.8);
+
+    &:active,
+    &:focus {
+      outline-style: none;
+    }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px #fbfbfb inset;
+      -webkit-text-fill-color: rgba(104, 50, 50, 0.8) !important;
+    }
+  }
+  .form-textarea {
+    width: 752px;
+    height: 198px;
+    padding-top: 10px;
+    background: #fbfbfb;
+    border: 2px solid #15a3b9;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 10px;
+
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 25px;
+
+    color: rgba(104, 50, 50, 0.8);
+
+    &:active,
+    &:focus {
+      outline-style: none;
+    }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px #fbfbfb inset;
+      -webkit-text-fill-color: rgba(104, 50, 50, 8) !important;
+    }
+  }
+  .date-container {
+    display: flex;
+    font-family: Avenir;
+    font-style: normal;
+
+    color: rgba(104, 50, 50, 0.8);
+
+    .date-inside-container {
+      width: 368px;
+      .date-class {
+        width: 368px;
+        background: #fbfbfb;
+        border: 2px solid #15a3b9;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding-left: 10px;
+        height: 50px;
+
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 25px;
+
+        color: rgba(104, 50, 50, 0.8);
+
+        &:active,
+        &:focus {
+          outline-style: none;
+        }
+        &:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0px 1000px #fbfbfb inset;
+          -webkit-text-fill-color: rgba(104, 50, 50, 8) !important;
+        }
+      }
+    }
+  }
+  .button-hired-container {
+    font-family: Avenir;
+    display: flex;
+  }
+}
+
+.modal-text {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+
+  color: #469f74;
+}

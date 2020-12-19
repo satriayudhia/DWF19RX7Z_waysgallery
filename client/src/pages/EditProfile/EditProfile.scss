@@ -3,7 +3,7 @@
   margin-top: 78px;
   .edit-profile-img-preview {
     width: 100%;
-    margin-left: 15%;
+    margin-left: 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,7 +26,7 @@
           line-height: 33px;
           align-items: center;
           text-align: center;
-          color: #2fc4b2;
+          color: #15a3b9;
         }
       }
       .dropzone {
@@ -47,7 +47,7 @@
         cursor: pointer;
 
         &:hover {
-          border: 5px dashed #5ca098;
+          border: 5px dashed #15a3b9;
         }
         &:active,
         &:focus {
@@ -55,15 +55,21 @@
         }
       }
       .active {
-        border: 5px dashed #5ca098;
+        border: 5px dashed #15a3b9;
       }
     }
     .edit-profile-art-preview {
+      display: flex;
+      margin-left: 6%;
+      margin-right: 6%;
+      justify-content: space-between;
       .edit-profile-preview-image-bottom {
+        margin: 5px;
         width: 150px;
         height: 120px;
         object-fit: cover;
-        border: 2px dashed #b2b2b2;
+        border: 5px dashed #b2b2b2;
+        border-radius: 5px;
       }
     }
     .img-preview-profile {
@@ -76,7 +82,7 @@
   }
   .edit-profile-form-container {
     width: 100%;
-    margin-right: 20%;
+    margin-right: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,11 +101,11 @@
           align-self: center;
           align-items: center;
           &:hover {
-            border: 5px dashed #5ca098;
+            border: 5px dashed #15a3b9;
           }
           .camera {
             &:hover {
-              fill: #5ca098;
+              fill: #15a3b9;
             }
           }
         }
@@ -120,7 +126,7 @@
         width: 350px;
         height: 50px;
         background: #fbfbfb;
-        border: 2px solid #5ca098;
+        border: 2px solid #15a3b9;
         box-sizing: border-box;
         border-radius: 5px;
         padding-left: 10px;
@@ -149,7 +155,7 @@
   }
 }
 
-.modal-body {
+.modal-bodys {
   display: flex;
   flex-direction: column;
   align-items: center;

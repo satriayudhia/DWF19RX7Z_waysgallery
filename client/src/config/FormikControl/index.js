@@ -1,5 +1,6 @@
 import Input from "../../components/atoms/Input";
 import TextArea from "../../components/atoms/TextArea";
+import DatePicker from "../../components/atoms/DatePicker";
 
 const FormikControl = (props) => {
   const { control, ...rest } = props;
@@ -12,6 +13,7 @@ const FormikControl = (props) => {
     case "radio":
     case "checkbox":
     case "date":
+      return <DatePicker {...rest} />;
     default:
       return null;
   }

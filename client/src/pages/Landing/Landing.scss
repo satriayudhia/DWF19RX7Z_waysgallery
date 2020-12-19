@@ -51,26 +51,8 @@
       display: flex;
       .btn-reg-landing {
         width: 100px;
-        height: 30px;
-        background: #2fc4b2;
-        border-radius: 5px;
-        border: 2px solid #2fc4b2;
-
         font-family: Avenir;
-        font-style: normal;
-        font-weight: 800;
-        font-size: 14px;
-        line-height: 19px;
-        padding-top: 2px;
-
-        color: #ffffff;
-        cursor: pointer;
-
-        &:hover {
-          background: #fff;
-          border: 2px solid #2fc4b2;
-          color: #2fc4b2;
-        }
+        font-weight: normal;
         &:active,
         &:focus {
           outline-style: none;
@@ -78,26 +60,15 @@
       }
       .btn-log-landing {
         width: 100px;
-        height: 30px;
-        background: #e7e7e7;
-        border-radius: 5px;
-        border-color: transparent;
-
+        color: #000000;
         font-family: Avenir;
         font-style: normal;
-        font-weight: 800;
-        font-size: 14px;
-        line-height: 19px;
-        padding-top: 2px;
-
-        color: #000000;
-        cursor: pointer;
+        background: #e7e7e7;
 
         &:hover {
-          background: #2fc4b2;
-          border: 2px solid #2fc4b2;
-          color: #ffff;
+          background: rgb(225, 228, 233);
         }
+
         &:active,
         &:focus {
           outline-style: none;
@@ -127,14 +98,14 @@
         font-weight: 900;
         font-size: 36px;
         line-height: 49px;
-        color: #2fc4b2;
+        color: #15a3b9;
         margin-bottom: 29px;
       }
       .form-input {
         width: 100%;
         height: 50px;
         background: #fbfbfb;
-        border: 2px solid #5ca098;
+        border: 2px solid #15a3b9;
         box-sizing: border-box;
         border-radius: 5px;
         padding-left: 10px;
@@ -158,6 +129,7 @@
         }
       }
       .alert-log {
+        margin-top: 20px;
       }
       .cursor-pointer {
         cursor: pointer;
@@ -169,6 +141,9 @@
         font-size: 18px;
         line-height: 25px;
         text-align: center;
+      }
+      .btn-register {
+        font-family: Avenir;
       }
     }
   }
@@ -188,14 +163,14 @@
         font-weight: 900;
         font-size: 36px;
         line-height: 49px;
-        color: #2fc4b2;
+        color: #15a3b9;
         margin-bottom: 29px;
       }
       .form-input {
         width: 100%;
         height: 50px;
         background: #fbfbfb;
-        border: 2px solid #5ca098;
+        border: 2px solid #15a3b9;
         box-sizing: border-box;
         border-radius: 5px;
         padding-left: 10px;
@@ -227,6 +202,9 @@
         font-size: 18px;
         line-height: 25px;
         text-align: center;
+      }
+      .btn-login {
+        font-family: Avenir;
       }
     }
   }

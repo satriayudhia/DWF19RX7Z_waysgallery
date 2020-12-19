@@ -11,7 +11,3 @@ export const setAuthToken = (token) => {
     delete API.defaults.headers.common["Authorization"];
   }
 };
-
-export const cloudinaryAPI = axios.create({
-  baseURL: "https://api.cloudinary.com/v1_1/satria-img/image/upload",
-});

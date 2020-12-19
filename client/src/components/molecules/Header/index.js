@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import Button from "react-bootstrap/Button";
 
 //CSS
 import "./Header.scss";
@@ -14,7 +15,6 @@ import { ReactComponent as Logo } from "../../../assets/logos/logo.svg";
 import { ReactComponent as ProfileButton } from "../../../assets/logos/profile-btn.svg";
 import { ReactComponent as OrderButton } from "../../../assets/logos/order-btn.svg";
 import { ReactComponent as LogoutButton } from "../../../assets/logos/logout-btn.svg";
-import Button from "../../atoms/Button";
 
 //Config
 import { API, setAuthToken } from "../../../config/API";
@@ -48,11 +48,12 @@ const Header = () => {
   };
 
   const toProfile = () => {
-    router.push("/profile");
+    router.push(`/profile/${user.id}`);
+    window.location.reload();
   };
 
   const toOrder = () => {
-    router.push("/order");
+    router.push("/transaction");
   };
 
   const toLogin = () => {
@@ -78,10 +79,12 @@ const Header = () => {
           <Row>
             <Col className="profile-header-right">
               <Button
+                variant="info"
                 onClick={toUpload}
                 className="btn-upload-header"
-                title="Upload"
-              />
+              >
+                Upload
+              </Button>
               <OverlayTrigger
                 trigger="click"
                 key="bottom"

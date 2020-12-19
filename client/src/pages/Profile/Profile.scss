@@ -29,26 +29,11 @@
       color: #000000;
     }
     .btn-profile-left {
-      width: 125px;
-      height: 32px;
-      background: #2fc4b2;
-      border-radius: 5px;
-      border: 2px solid #2fc4b2;
-
-      font-family: Avenir;
-      font-style: normal;
-      font-weight: 800;
+      width: 110px;
+      height: 30px;
       font-size: 14px;
-      line-height: 19px;
-
-      color: #ffffff;
-      cursor: pointer;
-
-      &:hover {
-        background: #fff;
-        border: 2px solid #2fc4b2;
-        color: #2fc4b2;
-      }
+      font-family: Avenir;
+      margin-right: 33px;
     }
   }
   .profile-right-container {
@@ -62,12 +47,14 @@
 
 .profile-mywork-container {
   margin-top: 50px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 9%;
+  margin-right: 5%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   .img-mywork {
+    margin: 1%;
+    border-radius: 5px;
     width: 356px;
     height: 328px;
     object-fit: cover;

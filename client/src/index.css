@@ -16,3 +16,8 @@ code {
   font-family: "Avenir";
   src: local("Avenir"), url(./fonts/Metropolis-Medium.otf) format("truetype");
 }
+
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"), url(./fonts/Inter-Regular.ttf) format("truetype");
+}

@@ -1,0 +1,70 @@
+.transaction-tab-container {
+  margin-top: 3%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.text-table-all {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  margin-left: 10%;
+  margin-right: 10%;
+
+  .transaction-title-link {
+    color: blue;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .align-text {
+    text-align: center;
+  }
+}
+
+.transactions-modal {
+  font-family: Avenir;
+  .transaction-price-color {
+    color: rgb(40, 167, 69);
+  }
+  .transaction-ok-btn {
+    margin-left: 10px;
+    width: 100px;
+  }
+}
+
+.transaction-btn-confirms-container {
+  display: flex;
+  justify-content: center;
+  .btn-transaction-cancel {
+    width: 80px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+  }
+  .btn-transaction-approve {
+    width: 80px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+  }
+}
+
+.transaction-btn-send-container {
+  display: flex;
+  justify-content: center;
+  .btn-transaction-send-project {
+    width: 100px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+  }
+}
