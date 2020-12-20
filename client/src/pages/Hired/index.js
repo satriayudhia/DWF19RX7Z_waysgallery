@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -18,6 +19,7 @@ import Header from "../../components/molecules/Header";
 import Gap from "../../components/atoms/Gap";
 
 const Hired = (props) => {
+  const router = useHistory();
   //Get UserInfo
   const user = JSON.parse(localStorage.getItem("userInfo"));
   const token = localStorage.getItem("token");
@@ -63,9 +65,15 @@ const Hired = (props) => {
       console.log("save to db status", saveToDb);
       setLoading(false);
       setModalShow(true);
+      await timeout(3000);
+      router.push("/transaction");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const timeout = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
   return (

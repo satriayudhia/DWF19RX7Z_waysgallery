@@ -31,11 +31,11 @@ exports.getUsers = async (req, res) => {
 };
 
 //GET SPECIFIC User BY ID
-exports.getUser = async (req, res) => {
+exports.getUserForProfile = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const latestId = await Post.max("id", { where: { userId: id } });
+    // const latestId = await Post.max("id", { where: { userId: id } });
 
     const user = await User.findOne({
       where: { id },
@@ -46,7 +46,7 @@ exports.getUser = async (req, res) => {
         {
           model: Post,
           as: "post",
-          where: { id: latestId },
+          // where: { id: latestId },
           attributes: {
             exclude: ["createdAt", "updatedAt", "UserId", "userId"],
           },

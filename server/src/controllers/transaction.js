@@ -57,6 +57,62 @@ exports.getTransactionsOrder = async (req, res) => {
   }
 };
 
+//GET MY ORDER TRANSACTIONS BY TRANSACTION ID
+exports.getOrderByTransactionId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const transactions = await Transaction.findAll({
+      where: { id },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      include: [
+        {
+          model: User,
+          as: "orderedBy",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: User,
+          as: "orderedTo",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: Project,
+          as: "project",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+
+    if (!transactions) {
+      return res.status(400).send({
+        status: "transaction empty",
+        data: [],
+      });
+    }
+
+    res.send({
+      status: "success",
+      data: { transactions: transactions },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      error: {
+        message: "server error",
+      },
+    });
+  }
+};
+
 //GET MY OFFER TRANSACTIONS
 exports.getTransactionsOffer = async (req, res) => {
   try {

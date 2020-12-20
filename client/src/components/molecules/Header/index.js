@@ -11,7 +11,7 @@ import Button from "react-bootstrap/Button";
 import "./Header.scss";
 
 //Components
-import { ReactComponent as Logo } from "../../../assets/logos/logo.svg";
+import Logo from "../../../assets/logos/logo.png";
 import { ReactComponent as ProfileButton } from "../../../assets/logos/profile-btn.svg";
 import { ReactComponent as OrderButton } from "../../../assets/logos/order-btn.svg";
 import { ReactComponent as LogoutButton } from "../../../assets/logos/logout-btn.svg";
@@ -31,7 +31,9 @@ const Header = () => {
   const getUser = async () => {
     try {
       setAuthToken(token);
-      const userInfo = await API.get(`/user/${user.id}`);
+
+      const userInfo = await API.get(`/user-profile/${user.id}`);
+      console.log("user info", userInfo);
       setUserData(userInfo.data.user);
       setImg(userInfo.data.user.profpic);
     } catch (error) {
@@ -73,7 +75,12 @@ const Header = () => {
     <Container fluid>
       <Row className="header-container">
         <Col className="logo-header-login">
-          <Logo className="logo-header-cursor" onClick={toHome} />
+          <img
+            src={Logo}
+            alt="waysgallery"
+            className="logo-header-cursor"
+            onClick={toHome}
+          />
         </Col>
         <Col className="profile-header">
           <Row>

@@ -1,4 +1,4 @@
-const { Post, User, Photo } = require("../../models");
+const { Post, User, Photo, Follow } = require("../../models");
 const Joi = require("joi");
 
 //GET ALL POSTS
@@ -27,6 +27,77 @@ exports.getPosts = async (req, res) => {
               "greeting",
             ],
           },
+          include: [
+            {
+              model: Follow,
+              as: "following",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!posts) {
+      return res.status(400).send({
+        status: "post empty",
+        data: [],
+      });
+    }
+
+    res.send({
+      status: "success",
+      data: { posts: posts },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      error: {
+        message: "server error",
+      },
+    });
+  }
+};
+
+//GET POSTS BY SEARCH
+exports.getPostsBySearch = async (req, res) => {
+  try {
+    const { body } = req;
+    const posts = await Post.findAll({
+      where: { title: body.title },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "userId", "UserId"],
+      },
+      include: [
+        {
+          model: Photo,
+          as: "photos",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "postId", "PostId"],
+          },
+        },
+        {
+          model: User,
+          attributes: {
+            exclude: [
+              "createdAt",
+              "updatedAt",
+              "password",
+              "profpic",
+              "greeting",
+            ],
+          },
+          include: [
+            {
+              model: Follow,
+              as: "following",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
         },
       ],
     });

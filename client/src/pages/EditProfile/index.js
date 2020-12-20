@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,6 +9,7 @@ import { useDropzone } from "react-dropzone";
 import { Image } from "cloudinary-react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 //CSS
 import "./EditProfile.scss";
@@ -22,6 +24,7 @@ import Gap from "../../components/atoms/Gap";
 import { ReactComponent as Camera } from "../../assets/logos/camera.svg";
 
 const EditProfile = () => {
+  const router = useHistory();
   //Get UserInfo
   const user = JSON.parse(localStorage.getItem("userInfo"));
   const token = localStorage.getItem("token");
@@ -49,6 +52,7 @@ const EditProfile = () => {
   });
 
   const onDrop = useCallback(async (acceptedFiles) => {
+    setLoading(true);
     acceptedFiles.forEach(async (acceptedFile) => {
       const body = new FormData();
       body.append("file", acceptedFile);
@@ -65,11 +69,8 @@ const EditProfile = () => {
       setCloudFiles((old) => [...old, data]);
 
       const arts = { photo: url };
-      const saveToDb = await API.post(`/arts/${user.id}`, arts);
-
-      console.log("saveToDb", saveToDb);
-      console.log("Data", data);
-      console.log("Cloudfiles", cloudFiles);
+      await API.post(`/arts/${user.id}`, arts);
+      setLoading(false);
     });
   }, []);
 
@@ -114,9 +115,9 @@ const EditProfile = () => {
     }
   };
 
-  const setRefresh = () => {
+  const toProfile = (id) => {
     setModalShow(false);
-    window.location.reload();
+    router.push(`/profile/${id}`);
   };
 
   const setStatus = () => {
@@ -135,29 +136,42 @@ const EditProfile = () => {
       <Row className="edit-profile-container">
         <Col className="edit-profile-img-preview">
           <Row className="edit-profile-art-upload">
-            <div
-              {...getRootProps()}
-              className={`dropzone ${isDragActive ? "active" : null}`}
-            >
-              <input {...getInputProps()} />
-              <p className="edit-best-upload">
-                <strong className="edit-blue-upload">Upload</strong> Best Your
-                Art
-              </p>
-            </div>
+            {isLoading ? (
+              <div className="dropzone">
+                <Spinner animation="border" variant="info" />
+              </div>
+            ) : (
+              <div
+                {...getRootProps()}
+                className={`dropzone ${isDragActive ? "active" : null}`}
+              >
+                <input {...getInputProps()} />
+                <p className="edit-best-upload">
+                  <strong className="edit-blue-upload">Upload</strong> Best Your
+                  Art
+                </p>
+              </div>
+            )}
           </Row>
           <Row className="edit-profile-art-preview">
-            {cloudFiles.map((file) => (
-              <div className="edit-profile-preview-image" key={file.public_id}>
-                <Image
-                  className="edit-profile-preview-image-bottom"
-                  cloudName="satria-img"
-                  publicId={file.public_id}
-                  width="150"
-                  crop="scale"
-                />
+            {isLoading ? (
+              <div className="edit-profile-preview-image">
+                <Spinner animation="border" variant="info" />
               </div>
-            ))}
+            ) : (
+              <div className="edit-profile-preview-image">
+                {cloudFiles.map((file) => (
+                  <Image
+                    key={file.public_id}
+                    className="edit-profile-preview-image-bottom"
+                    cloudName="satria-img"
+                    publicId={file.public_id}
+                    width="150"
+                    crop="scale"
+                  />
+                ))}
+              </div>
+            )}
           </Row>
         </Col>
         <Col className="edit-profile-form-container">
@@ -218,7 +232,17 @@ const EditProfile = () => {
                       disabled={isLoading || !formik.isValid}
                       onClick={!isLoading ? handleSubmit : null}
                     >
-                      {isLoading ? "Loading…" : "Save"}
+                      {isLoading ? (
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        "Save"
+                      )}
                     </Button>
                   </Form>
                 );
@@ -231,7 +255,7 @@ const EditProfile = () => {
       <Modal
         size="sm"
         show={modalShow}
-        onHide={() => setRefresh()}
+        onHide={() => setModalShow(false)}
         centered
         transparent={true}
       >
@@ -239,7 +263,7 @@ const EditProfile = () => {
           <h2 className="modal-confirms">Successfully Changed</h2>
           <Button
             variant="info"
-            onClick={() => setRefresh()}
+            onClick={() => toProfile(user.id)}
             className="btn-modal-ok"
           >
             OK

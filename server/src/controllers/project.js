@@ -1,46 +1,36 @@
 const { Project, ProjectImage } = require("../../models");
 const Joi = require("joi");
 
-//GET ALL PROJECTS
-exports.getProjects = async (req, res) => {
+//GET PROJECT BY TRANSACTION ID
+exports.getProject = async (req, res) => {
   try {
-    const projects = await Project.findAll({
+    const { id } = req.params;
+    const project = await Project.findAll({
+      where: { transactionId: id },
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt", "transactionId"],
       },
       include: [
         {
-          model: Photo,
-          as: "photos",
+          model: ProjectImage,
+          as: "images",
           attributes: {
-            exclude: ["createdAt", "updatedAt", "postId", "PostId"],
-          },
-        },
-        {
-          model: User,
-          attributes: {
-            exclude: [
-              "createdAt",
-              "updatedAt",
-              "password",
-              "profpic",
-              "greeting",
-            ],
+            exclude: ["createdAt", "updatedAt", "projectId"],
           },
         },
       ],
     });
 
-    if (!projects) {
+    if (!project) {
       return res.status(400).send({
-        status: "post empty",
+        status: "project empty",
         data: [],
       });
     }
 
     res.send({
       status: "success",
-      data: { projects: projects },
+      data: { project },
     });
   } catch (err) {
     console.log(err);

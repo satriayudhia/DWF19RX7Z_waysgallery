@@ -15,8 +15,8 @@ import "./Landing.scss";
 
 //Components
 import Gap from "../../components/atoms/Gap";
-import { ReactComponent as LandingBg } from "../../assets/images/home.svg";
-import { ReactComponent as LandingLogo } from "../../assets/images/landing-logo.svg";
+import LandingBg from "../../assets/images/home.png";
+import LandingLogo from "../../assets/images/landing-logo.png";
 import { ReactComponent as VectorLeftTop } from "../../assets/images/vector-left-top.svg";
 import { ReactComponent as VectorLeftBot } from "../../assets/images/vector-left-bot.svg";
 import { ReactComponent as VectorRightBot } from "../../assets/images/vector-right-bot.svg";
@@ -72,7 +72,8 @@ const Landing = (props) => {
         email: values.email,
         password: values.password,
         fullname: values.fullname,
-        profpic: "no-profpic.png",
+        profpic:
+          "https://res.cloudinary.com/satria-img/image/upload/v1606645803/satriayud/no-person-profile-pic_k3ijd5.png",
       });
       const config = { headers: { "Content-Type": "application/json" } };
       const response = await API.post("/register", data, config);
@@ -131,7 +132,11 @@ const Landing = (props) => {
         <VectorRightBot className="vector-right-bot" />
         <Col className="landing-left-container">
           <Row className="logo-left-landing">
-            <LandingLogo />
+            <img
+              className="logo-left-landing-img"
+              src={LandingLogo}
+              alt="landing-logo"
+            />
           </Row>
           <Row className="title-left-landing">
             show your work to inspire everyone
@@ -161,7 +166,7 @@ const Landing = (props) => {
           </Row>
         </Col>
         <Col className="landing-right-container">
-          <LandingBg />
+          <img className="landing-right-img" src={LandingBg} alt="bg" />
         </Col>
       </Row>
       <Modal

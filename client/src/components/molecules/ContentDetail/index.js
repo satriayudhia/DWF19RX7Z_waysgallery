@@ -43,7 +43,7 @@ const ContentDetail = (props) => {
               src={photo}
               alt="img-post"
               style={{
-                border: selectedImg === photo ? "4px solid #15a3b9" : "",
+                border: selectedImg === photo ? "3px solid #15a3b9" : "",
               }}
             />
           </div>

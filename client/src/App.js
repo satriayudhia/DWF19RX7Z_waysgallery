@@ -10,6 +10,7 @@ import DetailPost from "./pages/DetailPost";
 import Hired from "./pages/Hired";
 import Transaction from "./pages/Transaction";
 import AddProject from "./pages/AddProject";
+import ViewProject from "./pages/ViewProject";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/hired/:userId" component={Hired} />
         <Route exact path="/transaction" component={Transaction} />
         <Route exact path="/add-project/:id" component={AddProject} />
+        <Route exact path="/view-project/:id" component={ViewProject} />
       </Switch>
     </Router>
   );

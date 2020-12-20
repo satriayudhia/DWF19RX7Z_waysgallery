@@ -68,7 +68,7 @@ const AddProject = (props) => {
           console.log("saveToDb", saveToDb);
         });
 
-        const data = { status: "success" };
+        const data = { status: "waiting approved project" };
         await API.patch(`/transaction/${id}`, data);
 
         setLoading(false);
@@ -103,12 +103,12 @@ const AddProject = (props) => {
     maxFiles: 5,
   });
 
-  const setRefresh = () => {
+  const toViewProject = (id) => {
     setModalShow(false);
-    router.push("/transaction");
+    router.push(`/view-project/${id}`);
   };
 
-  const toHomePage = () => {
+  const toTransaction = () => {
     setModalShow(false);
     router.push("/transaction");
   };
@@ -192,7 +192,7 @@ const AddProject = (props) => {
 
       <Modal
         show={modalShow}
-        onHide={() => setRefresh()}
+        onHide={() => setModalShow(false)}
         centered
         transparent={true}
       >
@@ -207,15 +207,15 @@ const AddProject = (props) => {
         <Modal.Footer>
           <Button
             variant="secondary"
-            onClick={() => setRefresh()}
-            className="btn-modal-ok"
+            onClick={() => toTransaction()}
+            className="btn-modal-add-project-ok"
           >
             Nope
           </Button>
           <Button
             variant="info"
-            onClick={() => toHomePage()}
-            className="btn-modal-ok"
+            onClick={() => toViewProject(props.match.params.id)}
+            className="btn-modal-add-project-ok"
           >
             Ok
           </Button>

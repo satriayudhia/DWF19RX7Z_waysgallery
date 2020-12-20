@@ -45,9 +45,13 @@ const Transaction = () => {
     try {
       setAuthToken(token);
       const transactionOffer = await API.get(`/transactions-offer/${user.id}`);
-      setDataOffers(transactionOffer.data.data.transactions);
+      setDataOffers(
+        transactionOffer.data.data.transactions.sort((a, b) => a - b).reverse()
+      );
       const transactionOrder = await API.get(`/transactions-order/${user.id}`);
-      setDataOrders(transactionOrder.data.data.transactions);
+      setDataOrders(
+        transactionOrder.data.data.transactions.sort((a, b) => a - b).reverse()
+      );
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +68,7 @@ const Transaction = () => {
 
   const handleApprove = async (id) => {
     try {
-      const body = { status: "waiting approved project" };
+      const body = { status: "on going progress" };
       await API.patch(`/transaction/${id}`, body);
       setModalShow(false);
       getTransactions();
@@ -88,7 +92,9 @@ const Transaction = () => {
     router.push(`/add-project/${id}`);
   };
 
-  const toViewProject = (id) => {};
+  const toViewProject = (id) => {
+    router.push(`/view-project/${id}`);
+  };
 
   return dataOffers == undefined || dataOrders == undefined ? (
     <h1>Loading...</h1>
@@ -113,63 +119,72 @@ const Transaction = () => {
                 <th className="align-text">Action</th>
               </tr>
             </thead>
-            <tbody>
-              {dataOrders.map((order, index) => (
-                <tr key={index}>
-                  <td className="align-text">{index + 1}</td>
-                  <td>{order.orderedTo.fullname}</td>
-                  <td>
-                    <span
-                      className="transaction-title-link"
-                      onClick={() => setModalData(order)}
-                    >
-                      {order.title}
-                    </span>
-                  </td>
-                  <td>
-                    {new Date(order.startDate).toLocaleDateString([], options)}
-                  </td>
-                  <td>
-                    {new Date(order.endDate).toLocaleDateString([], options)}
-                  </td>
-                  <td>
-                    <span
-                      style={{
-                        color:
-                          order.status === "waiting approval"
-                            ? "#FF9900"
-                            : order.status === "success"
-                            ? "#28a646"
-                            : order.status === "canceled"
-                            ? "#E83939"
-                            : "#00D1FF",
-                      }}
-                    >
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="align-text">
-                    {order.status === "waiting approval" ? (
-                      <WaitingIcon />
-                    ) : order.status === "success" ? (
-                      <CompletedIcon />
-                    ) : order.status === "canceled" ? (
-                      <CancelIcon />
-                    ) : (
-                      <div className="transaction-btn-send-container">
-                        <Button
-                          className="btn-transaction-send-project"
-                          variant="success"
-                          onClick={() => toViewProject(order.id)}
-                        >
-                          View Project
-                        </Button>
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {dataOrders.length == 0 ? (
+              <div>No Orders Yet</div>
+            ) : (
+              <tbody>
+                {dataOrders.map((order, index) => (
+                  <tr key={index}>
+                    <td className="align-text">{index + 1}</td>
+                    <td>{order.orderedTo.fullname}</td>
+                    <td>
+                      <span
+                        className="transaction-title-link"
+                        onClick={() => setModalData(order)}
+                      >
+                        {order.title}
+                      </span>
+                    </td>
+                    <td>
+                      {new Date(order.startDate).toLocaleDateString(
+                        [],
+                        options
+                      )}
+                    </td>
+                    <td>
+                      {new Date(order.endDate).toLocaleDateString([], options)}
+                    </td>
+                    <td>
+                      <span
+                        style={{
+                          color:
+                            order.status === "waiting approval" ||
+                            order.status === "on going progress"
+                              ? "#FF9900"
+                              : order.status === "completed"
+                              ? "#28a646"
+                              : order.status === "canceled"
+                              ? "#E83939"
+                              : "#00D1FF",
+                        }}
+                      >
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="align-text">
+                      {order.status === "waiting approval" ||
+                      order.status === "on going progress" ? (
+                        <WaitingIcon />
+                      ) : order.status === "success" ? (
+                        <CompletedIcon />
+                      ) : order.status === "canceled" ? (
+                        <CancelIcon />
+                      ) : (
+                        <div className="transaction-btn-send-container">
+                          <Button
+                            className="btn-transaction-send-project"
+                            variant="success"
+                            onClick={() => toViewProject(order.id)}
+                          >
+                            View Project
+                          </Button>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </Table>
         </Tab>
         <Tab className="text-table-all" eventKey="offer" title="My Offer">
@@ -185,79 +200,97 @@ const Transaction = () => {
                 <th className="align-text">Action</th>
               </tr>
             </thead>
-            <tbody>
-              {dataOffers.map((offer, index) => (
-                <tr key={index}>
-                  <td className="align-text">{index + 1}</td>
-                  <td>{offer.orderedBy.fullname}</td>
-                  <td>
-                    <span
-                      className="transaction-title-link"
-                      onClick={() => setModalData(offer)}
-                    >
-                      {offer.title}
-                    </span>
-                  </td>
-                  <td>
-                    {new Date(offer.startDate).toLocaleDateString([], options)}
-                  </td>
-                  <td>
-                    {new Date(offer.endDate).toLocaleDateString([], options)}
-                  </td>
-                  <td>
-                    <span
-                      style={{
-                        color:
-                          offer.status === "waiting approval"
-                            ? "#FF9900"
-                            : offer.status === "success"
-                            ? "#28a646"
-                            : offer.status === "canceled"
-                            ? "#E83939"
-                            : "#00D1FF",
-                      }}
-                    >
-                      {offer.status}
-                    </span>
-                  </td>
-                  <td className="align-text">
-                    {offer.status === "waiting approval" ? (
-                      <div className="transaction-btn-confirms-container">
-                        <Button
-                          className="btn-transaction-cancel"
-                          variant="danger"
-                          onClick={() => handleCancel(offer.id)}
-                        >
-                          Cancel
-                        </Button>
-                        <Gap width={10} />
-                        <Button
-                          className="btn-transaction-approve"
-                          variant="success"
-                          onClick={() => handleApprove(offer.id)}
-                        >
-                          Approve
-                        </Button>
-                      </div>
-                    ) : offer.status === "success" ? (
-                      <CompletedIcon />
-                    ) : offer.status === "canceled" ? (
-                      <CancelIcon />
-                    ) : (
-                      <div className="transaction-btn-send-container">
-                        <Button
-                          className="btn-transaction-send-project"
-                          variant="success"
-                          onClick={() => toAddProject(offer.id)}
-                        >
-                          Send Project
-                        </Button>
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {dataOffers.length == 0 ? (
+              <div>No Offers Yet</div>
+            ) : (
+              <tbody>
+                {dataOffers.map((offer, index) => (
+                  <tr key={index}>
+                    <td className="align-text">{index + 1}</td>
+                    <td>{offer.orderedBy.fullname}</td>
+                    <td>
+                      <span
+                        className="transaction-title-link"
+                        onClick={() => setModalData(offer)}
+                      >
+                        {offer.title}
+                      </span>
+                    </td>
+                    <td>
+                      {new Date(offer.startDate).toLocaleDateString(
+                        [],
+                        options
+                      )}
+                    </td>
+                    <td>
+                      {new Date(offer.endDate).toLocaleDateString([], options)}
+                    </td>
+                    <td>
+                      <span
+                        style={{
+                          color:
+                            offer.status === "waiting approval" ||
+                            offer.status === "on going progress"
+                              ? "#FF9900"
+                              : offer.status === "success"
+                              ? "#28a646"
+                              : offer.status === "canceled"
+                              ? "#E83939"
+                              : "#00D1FF",
+                        }}
+                      >
+                        {offer.status}
+                      </span>
+                    </td>
+                    <td className="align-text">
+                      {offer.status === "waiting approval" ? (
+                        <div className="transaction-btn-confirms-container">
+                          <Button
+                            className="btn-transaction-cancel"
+                            variant="danger"
+                            onClick={() => handleCancel(offer.id)}
+                          >
+                            Cancel
+                          </Button>
+                          <Gap width={10} />
+                          <Button
+                            className="btn-transaction-approve"
+                            variant="success"
+                            onClick={() => handleApprove(offer.id)}
+                          >
+                            Approve
+                          </Button>
+                        </div>
+                      ) : offer.status === "success" ? (
+                        <CompletedIcon />
+                      ) : offer.status === "canceled" ? (
+                        <CancelIcon />
+                      ) : offer.status === "waiting approved project" ? (
+                        <div className="transaction-btn-confirms-container">
+                          <Button
+                            className="btn-transaction-view-project"
+                            variant="success"
+                            onClick={() => toViewProject(offer.id)}
+                          >
+                            View Project
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="transaction-btn-send-container">
+                          <Button
+                            className="btn-transaction-send-project"
+                            variant="info"
+                            onClick={() => toAddProject(offer.id)}
+                          >
+                            Send Project
+                          </Button>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </Table>
         </Tab>
       </Tabs>
@@ -304,7 +337,7 @@ const Transaction = () => {
                       variant="info"
                       onClick={() => setModalShow(false)}
                     >
-                      Ok
+                      Close
                     </Button>
                   ) : description.status === "waiting approval" ? (
                     <div>
@@ -327,6 +360,14 @@ const Transaction = () => {
                     <Button
                       className="transaction-send-btn"
                       variant="success"
+                      onClick={() => toViewProject(description.id)}
+                    >
+                      View Project
+                    </Button>
+                  ) : description.status === "on going progress" ? (
+                    <Button
+                      className="transaction-send-btn"
+                      variant="info"
                       onClick={() => toAddProject(description.id)}
                     >
                       Send Project
@@ -336,29 +377,30 @@ const Transaction = () => {
               ) : (
                 <div>
                   {description.status === "canceled" ||
-                  description.status === "success" ? (
+                  description.status === "success" ||
+                  description.status === "on going progress" ? (
                     <Button
                       className="transaction-ok-btn"
                       variant="info"
                       onClick={() => setModalShow(false)}
                     >
-                      Ok
+                      Close
                     </Button>
                   ) : description.status === "waiting approval" ? (
                     <div>
                       <Button
-                        className="transaction-ok-btn"
+                        className="transaction-ok-btn-cancel"
                         variant="danger"
                         onClick={() => handleCancel(description.id)}
                       >
-                        Cancel
+                        Cancel Order
                       </Button>
                       <Button
                         className="transaction-ok-btn"
-                        variant="success"
+                        variant="info"
                         onClick={() => setModalShow(false)}
                       >
-                        Ok
+                        Close
                       </Button>
                     </div>
                   ) : description.status === "project completed" ||

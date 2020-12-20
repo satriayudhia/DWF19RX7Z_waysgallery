@@ -16,14 +16,13 @@ import { API, setAuthToken } from "../../config/API";
 import Header from "../../components/molecules/Header";
 import Jumbotron from "../../assets/images/jumbotron.png";
 import Gap from "../../components/atoms/Gap";
+import { ReactComponent as VectorRightProfile } from "../../assets/images/vector-right-profile.svg";
 
 const Profile = (props) => {
   const router = useHistory();
   //Get UserInfo
   const [userData, setUserData] = useState(undefined);
-  const [img, setImg] = useState("");
-  const [latestPost, setLatestPost] = useState("");
-  const [arts, setArts] = useState([{}]);
+  const [length, setLength] = useState(0);
 
   const userLogin = JSON.parse(localStorage.getItem("userInfo"));
   const token = localStorage.getItem("token");
@@ -31,21 +30,16 @@ const Profile = (props) => {
   const getUser = async (userId) => {
     try {
       setAuthToken(token);
-      const userInfo = await API.get(`/user/${userId}`);
+      const userInfo = await API.get(`/user-profile/${userId}`);
+      setLength(userInfo.data.user.post.length - 1);
       setUserData(userInfo.data.user);
-      console.log("user data: ", userInfo.data.user.following[0].following);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const checkFollowing = () => {
-    // console.log("checking", userData);
-  };
-
   useEffect(() => {
     getUser(props.match.params.id);
-    checkFollowing();
   }, []);
 
   const handleFollow = async () => {
@@ -92,7 +86,12 @@ const Profile = (props) => {
           <img src={userData.profpic} className="profile-img-left" />
           <Gap height={23} />
           <p className="profile-name-left">{userData.fullname}</p>
-          <p className="profile-greeting-left">{userData.description}</p>
+          {userData.greeting == null ? (
+            <p className="no-greeting-yet">This user not set greeting yet</p>
+          ) : (
+            <p className="profile-greeting-left">{userData.greeting}</p>
+          )}
+
           {userData.id == userLogin.id ? (
             <Button
               variant="info"
@@ -135,22 +134,33 @@ const Profile = (props) => {
           )}
         </Col>
         <Col className="profile-right-container">
-          <img
-            onClick={() => toPost(userData.post[0].id)}
-            src={userData.post[0].photos[0].photo}
-            alt="jumbotron"
-          />
+          <VectorRightProfile className="vector-right-profile" />
+          {userData.post.length == 0 ? (
+            <p className="latest-post-container">No Post Yet</p>
+          ) : (
+            <img
+              className="latest-post-container"
+              onClick={() => toPost(userData.post[0].id)}
+              src={userData.post[length].photos[0].photo}
+              alt="jumbotron"
+            />
+          )}
         </Col>
       </Row>
+      <Row className="profile-mywork-head">My Work</Row>
       <Row className="profile-mywork-container">
-        {userData.arts.map((art) => (
-          <img
-            key={art.id}
-            src={art.photo}
-            alt="my-work"
-            className="img-mywork"
-          />
-        ))}
+        {userData.arts.length == 0 ? (
+          <p className="no-greeting-yet">This user has no art uploaded yet</p>
+        ) : (
+          userData.arts.map((art) => (
+            <img
+              key={art.id}
+              src={art.photo}
+              alt="my-work"
+              className="img-mywork"
+            />
+          ))
+        )}
       </Row>
     </Container>
   );
