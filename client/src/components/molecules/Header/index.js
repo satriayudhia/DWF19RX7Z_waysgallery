@@ -70,7 +70,7 @@ const Header = () => {
   };
 
   return !userData ? (
-    <p>loading</p>
+    <p></p>
   ) : (
     <Container fluid>
       <Row className="header-container">

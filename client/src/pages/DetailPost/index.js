@@ -40,7 +40,7 @@ const DetailPost = (props) => {
   }, []);
 
   return post == undefined ? (
-    <h1>Loading...</h1>
+    <h1></h1>
   ) : (
     <Container fluid>
       <Header />

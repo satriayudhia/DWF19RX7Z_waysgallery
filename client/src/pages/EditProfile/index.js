@@ -80,11 +80,13 @@ const EditProfile = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("success?", e);
     try {
       if (profpic == undefined) {
         setLoading(true);
         const editUser = { greeting: e.greeting, fullname: e.fullname };
-        await API.patch(`/user/${user.id}`, editUser);
+        const db = await API.patch(`/user/${user.id}`, editUser);
+
         setStatus();
       } else if (profpic) {
         setLoading(true);
@@ -108,6 +110,7 @@ const EditProfile = () => {
           profpic: url,
         };
         await API.patch(`/user/${user.id}`, editUser);
+
         setStatus();
       }
     } catch (error) {
@@ -229,8 +232,9 @@ const EditProfile = () => {
                       block
                       variant="info"
                       className="btn-save"
+                      type="submit"
                       disabled={isLoading || !formik.isValid}
-                      onClick={!isLoading ? handleSubmit : null}
+                      // onClick={!isLoading ? handleSubmit : null}
                     >
                       {isLoading ? (
                         <Spinner

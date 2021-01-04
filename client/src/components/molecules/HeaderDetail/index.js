@@ -69,7 +69,7 @@ const HeaderDetail = (props) => {
   };
 
   return userData == undefined ? (
-    <p>loading</p>
+    <p></p>
   ) : (
     <Container fluid>
       <Row className="header-detail-container">
@@ -84,7 +84,12 @@ const HeaderDetail = (props) => {
           </div>
           <div className="header-detail-title">
             <p className="header-detail-top-title">{props.title}</p>
-            <p className="header-detail-name">{props.User.fullname}</p>
+            <p
+              onClick={() => toProfile(props.User.id)}
+              className="header-detail-name"
+            >
+              {props.User.fullname}
+            </p>
           </div>
         </Col>
 

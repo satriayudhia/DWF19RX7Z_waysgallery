@@ -12,6 +12,18 @@
       outline: none !important;
       outline-offset: none !important;
       border: none;
+      font-family: Avenir;
+      color: #868686;
+      &:focus {
+        color: #000000;
+        background: #e7e7e7;
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    .homepage-dropdown-menu {
+      font-family: Avenir;
+      color: #868686;
       &:focus {
         color: #000000;
         background: #e7e7e7;

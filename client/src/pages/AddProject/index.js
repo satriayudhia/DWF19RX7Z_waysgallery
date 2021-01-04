@@ -10,6 +10,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDropzone } from "react-dropzone";
 import { Image } from "cloudinary-react";
+import Spinner from "react-bootstrap/Spinner";
 
 //Config
 import FormikControl from "../../config/FormikControl";
@@ -81,6 +82,7 @@ const AddProject = (props) => {
 
   const onDrop = useCallback(async (acceptedFiles) => {
     acceptedFiles.forEach(async (acceptedFile) => {
+      setLoading(true);
       const body = new FormData();
       body.append("file", acceptedFile);
       body.append("upload_preset", "satriayud");
@@ -94,6 +96,7 @@ const AddProject = (props) => {
       const data = await response.json();
 
       setCloudFiles((old) => [...old, data]);
+      setLoading(false);
     });
   }, []);
 
@@ -119,33 +122,46 @@ const AddProject = (props) => {
       <Row className="addpost-container">
         <Col className="addpost-left-container">
           <Row className="addpost-image-upload">
-            <div
-              {...getRootProps()}
-              className={`dropzone ${isDragActive ? "active" : null}`}
-            >
-              <input {...getInputProps()} />
-              <div className="add-post-upload">
-                <Cloud />
-                <p className="add-post-browse">
-                  <strong className="browse">Browse</strong>&nbsp; to choose
-                  file
-                </p>
+            {isLoading ? (
+              <div className="dropzone">
+                <Spinner animation="border" variant="info" />
               </div>
-            </div>
+            ) : (
+              <div
+                {...getRootProps()}
+                className={`dropzone ${isDragActive ? "active" : null}`}
+              >
+                <input {...getInputProps()} />
+                <div className="add-post-upload">
+                  <Cloud />
+                  <p className="add-post-browse">
+                    <strong className="browse">Browse</strong>&nbsp; to choose
+                    file
+                  </p>
+                </div>
+              </div>
+            )}
           </Row>
           <Gap height={20} />
           <Row className="add-post-bottom-container">
-            {cloudFiles.map((file) => (
-              <div className="add-post-preview-image" key={file.public_id}>
-                <Image
-                  className="add-post-img"
-                  cloudName="satria-img"
-                  publicId={file.public_id}
-                  width="150"
-                  crop="scale"
-                />
+            {isLoading ? (
+              <div className="add-post-preview-image">
+                <Spinner animation="border" variant="info" />
               </div>
-            ))}
+            ) : (
+              <div className="add-post-preview-image">
+                {cloudFiles.map((file) => (
+                  <Image
+                    key={file.public_id}
+                    className="add-post-img"
+                    cloudName="satria-img"
+                    publicId={file.public_id}
+                    width="150"
+                    crop="scale"
+                  />
+                ))}
+              </div>
+            )}
           </Row>
         </Col>
         <Col className="addpost-right-container">

@@ -30,6 +30,7 @@ const Home = () => {
   //State
   const [posts, setPosts] = useState([{}]);
   const [searchValue, setSearchValue] = useState("");
+  const [dropdown, setDropDown] = useState("today");
 
   //Initial State Formik
   const initialValues = {
@@ -63,11 +64,25 @@ const Home = () => {
         <Col className="homepage-left">
           <Dropdown variant="secondary">
             <Dropdown.Toggle className="homepage-dropdown-container">
-              Today
+              {dropdown}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item>Following</Dropdown.Item>
+            <Dropdown.Menu className="homepage-dropdown-menu">
+              {dropdown === "today" ? (
+                <Dropdown.Item
+                  eventKey="following"
+                  onSelect={() => setDropDown("following")}
+                >
+                  following
+                </Dropdown.Item>
+              ) : (
+                <Dropdown.Item
+                  eventKey="today"
+                  onSelect={() => setDropDown("today")}
+                >
+                  today
+                </Dropdown.Item>
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </Col>
@@ -96,10 +111,20 @@ const Home = () => {
         </Col>
       </Row>
       <Row className="homepage-title">
-        {searchValue === "" ? "Today's Post" : "Search Result"}
+        {searchValue === "" ? (
+          <div>
+            {dropdown === "today"
+              ? "Today's Post"
+              : dropdown === "following"
+              ? "Based On Your Following"
+              : null}
+          </div>
+        ) : (
+          <div>Search's Result</div>
+        )}
       </Row>
       <Row className="homepage-content-wrapper">
-        <Content search={searchValue} />
+        <Content search={searchValue} setFilter={dropdown} />
       </Row>
     </Container>
   );

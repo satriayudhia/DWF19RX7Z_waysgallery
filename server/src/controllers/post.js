@@ -19,13 +19,7 @@ exports.getPosts = async (req, res) => {
         {
           model: User,
           attributes: {
-            exclude: [
-              "createdAt",
-              "updatedAt",
-              "password",
-              "profpic",
-              "greeting",
-            ],
+            exclude: ["createdAt", "updatedAt", "password", "greeting"],
           },
           include: [
             {
@@ -130,7 +124,7 @@ exports.getPost = async (req, res) => {
     const post = await Post.findOne({
       where: { id },
       attributes: {
-        exclude: ["createdAt", "updatedAt", "userId", "UserId"],
+        exclude: ["updatedAt", "userId", "UserId"],
       },
       include: [
         {

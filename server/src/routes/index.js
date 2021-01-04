@@ -67,7 +67,7 @@ router.patch("/user/:id", authentication, updateUser);
 router.post("/arts/:id", authentication, addArts);
 
 //POSTS PATH
-router.get("/posts", authentication, getPosts);
+router.get("/posts", getPosts);
 router.get("/post/:id", authentication, getPost);
 router.get("/posts-search", authentication, getPostsBySearch);
 router.get("/post-user/:userId", authentication, getPostByUserId);

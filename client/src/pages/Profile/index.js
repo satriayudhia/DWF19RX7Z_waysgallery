@@ -77,7 +77,7 @@ const Profile = (props) => {
   };
 
   return userData == undefined ? (
-    <p>loading</p>
+    <p></p>
   ) : (
     <Container fluid>
       <Header />
@@ -140,7 +140,7 @@ const Profile = (props) => {
           ) : (
             <img
               className="latest-post-container"
-              onClick={() => toPost(userData.post[0].id)}
+              onClick={() => toPost(userData.post[length].id)}
               src={userData.post[length].photos[0].photo}
               alt="jumbotron"
             />
